@@ -10,9 +10,17 @@ const PAINS = [
       </svg>
     ),
     title: '45 minutes perdues par devis',
-    desc: 'Copier-coller depuis Excel, reformater le tableau Word, corriger les erreurs de calcul à la main. Pour chaque devis. Tous les jours.',
+    desc: 'Copier-coller depuis Excel, reformater le tableau Word, corriger les erreurs à la main. Pour chaque devis. Tous les jours.',
     stat: '45 min',
     statLabel: 'par devis en moyenne',
+    gradientFrom: 'from-red-500/20',
+    gradientTo: 'to-red-500/5',
+    borderColor: 'border-red-500/15',
+    iconBg: 'bg-gradient-to-br from-red-500/20 to-red-500/5',
+    iconBorder: 'border-red-500/20',
+    iconColor: 'text-red-400',
+    statColor: 'from-red-300 to-red-500',
+    labelColor: 'text-red-400/80',
   },
   {
     icon: (
@@ -25,6 +33,14 @@ const PAINS = [
     desc: "Un prix oublié, une remise mal appliquée, une référence erronée. Le client s'en rend compte avant vous — ou vous perdez de la marge sans le savoir.",
     stat: '1 sur 3',
     statLabel: 'devis contient une erreur',
+    gradientFrom: 'from-orange-500/20',
+    gradientTo: 'to-orange-500/5',
+    borderColor: 'border-orange-500/15',
+    iconBg: 'bg-gradient-to-br from-orange-500/20 to-orange-500/5',
+    iconBorder: 'border-orange-500/20',
+    iconColor: 'text-orange-400',
+    statColor: 'from-orange-300 to-orange-500',
+    labelColor: 'text-orange-400/80',
   },
   {
     icon: (
@@ -34,9 +50,17 @@ const PAINS = [
       </svg>
     ),
     title: 'Zéro visibilité commerciale',
-    desc: "Combien de devis en attente ? Lesquels relancer ? Quel est votre taux de conversion ? Personne ne le sait. Parce que tout est éparpillé dans des fichiers et des emails.",
+    desc: "Combien de devis en attente ? Lesquels relancer ? Quel est votre taux de conversion ? Personne ne le sait. Tout est éparpillé dans des fichiers et des emails.",
     stat: '68%',
     statLabel: 'des devis ne sont jamais relancés',
+    gradientFrom: 'from-rose-500/20',
+    gradientTo: 'to-rose-500/5',
+    borderColor: 'border-rose-500/15',
+    iconBg: 'bg-gradient-to-br from-rose-500/20 to-rose-500/5',
+    iconBorder: 'border-rose-500/20',
+    iconColor: 'text-rose-400',
+    statColor: 'from-rose-300 to-rose-500',
+    labelColor: 'text-rose-400/80',
   },
 ]
 
@@ -45,42 +69,106 @@ export default function Problems() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="bg-slate-950 py-32 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative bg-slate-950 py-32 lg:py-40 px-6 border-t border-white/[0.05]">
+      {/* Subtle background glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 60% 40% at 50% 100%, rgba(239,68,68,0.04) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative max-w-6xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="text-center mb-20"
         >
-          <p className="text-xs font-semibold tracking-widest uppercase text-blue-400 mb-5">Le problème</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
-            Vous perdez des affaires<br />
+          <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-red-400/80 bg-red-400/[0.08] border border-red-400/15 px-4 py-2 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 bg-red-400 rounded-full" />
+            Le problème
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight">
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #ffffff 0%, #94a3b8 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Vous perdez des affaires
+            </span>
+            <br />
             <span className="text-slate-500">à cause de vos devis</span>
           </h2>
+          <p className="mt-5 text-lg text-slate-400 leading-relaxed max-w-xl mx-auto">
+            Ce ne sont pas vos prix, ni votre savoir-faire. C'est le processus qui fuit.
+          </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-3 gap-8 mt-20">
+        <div className="grid sm:grid-cols-3 gap-6">
           {PAINS.map((p, i) => (
             <motion.div
               key={p.title}
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.15 * i }}
+              transition={{ duration: 0.6, delay: 0.12 * i, ease: [0.21, 0.47, 0.32, 0.98] }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 rounded-3xl p-8 text-center hover:border-white/20 transition-all"
+              className={`group relative bg-white/[0.03] border ${p.borderColor} rounded-3xl p-8 hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-300 shadow-xl shadow-black/20 overflow-hidden`}
             >
-              <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mx-auto">
+              {/* Card inner glow */}
+              <div
+                className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none`}
+                style={{
+                  background: `radial-gradient(ellipse 80% 60% at 50% 0%, rgba(239,68,68,0.06) 0%, transparent 70%)`,
+                }}
+              />
+
+              {/* Icon */}
+              <div className={`w-14 h-14 rounded-2xl ${p.iconBg} border ${p.iconBorder} flex items-center justify-center ${p.iconColor} mb-8 relative z-10`}>
                 {p.icon}
               </div>
-              <div className="text-5xl font-black text-white mb-2 mt-6">{p.stat}</div>
-              <div className="text-sm text-red-400 font-medium mb-5">{p.statLabel}</div>
-              <h3 className="font-bold text-white text-lg mb-3">{p.title}</h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{p.desc}</p>
+
+              {/* Big stat */}
+              <div className="relative z-10 mb-1">
+                <span
+                  className="text-6xl font-black tracking-tight"
+                  style={{
+                    background: `linear-gradient(135deg, #ffffff 0%, #94a3b8 100%)`,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {p.stat}
+                </span>
+              </div>
+              <div className={`text-sm font-medium ${p.labelColor} mb-5 relative z-10`}>{p.statLabel}</div>
+
+              {/* Divider */}
+              <div className="h-px bg-white/[0.06] mb-5" />
+
+              <h3 className="font-bold text-white text-base mb-3 relative z-10">{p.title}</h3>
+              <p className="text-sm text-slate-400 leading-relaxed relative z-10">{p.desc}</p>
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom callout */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="mt-12 text-center"
+        >
+          <p className="text-slate-500 text-sm">
+            <span className="text-slate-300 font-medium">La bonne nouvelle :</span>{' '}
+            ces trois problèmes ont la même solution.
+          </p>
+        </motion.div>
       </div>
     </section>
   )
