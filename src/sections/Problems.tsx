@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { useInView } from 'framer-motion'
 
 const PAINS = [
   {
@@ -46,23 +45,23 @@ export default function Problems() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="bg-slate-950 py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section className="bg-slate-950 py-32 px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center"
         >
-          <p className="text-xs font-semibold tracking-widest uppercase text-red-400 mb-4">Le problème</p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+          <p className="text-xs font-semibold tracking-widest uppercase text-blue-400 mb-5">Le problème</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
             Vous perdez des affaires<br />
-            <span className="text-slate-400">à cause de vos devis</span>
+            <span className="text-slate-500">à cause de vos devis</span>
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-3 gap-8 mt-20">
           {PAINS.map((p, i) => (
             <motion.div
               key={p.title}
@@ -70,14 +69,14 @@ export default function Problems() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15 * i }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="bg-white/3 border border-white/8 rounded-2xl p-6 hover:border-red-500/20 hover:bg-red-500/3 transition-colors"
+              className="bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 rounded-3xl p-8 text-center hover:border-white/20 transition-all"
             >
-              <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-5">
+              <div className="w-14 h-14 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mx-auto">
                 {p.icon}
               </div>
-              <div className="text-3xl font-bold text-white mb-1">{p.stat}</div>
-              <div className="text-xs text-red-400 mb-4 font-medium">{p.statLabel}</div>
-              <h3 className="font-semibold text-white mb-2 text-base">{p.title}</h3>
+              <div className="text-5xl font-black text-white mb-2 mt-6">{p.stat}</div>
+              <div className="text-sm text-red-400 font-medium mb-5">{p.statLabel}</div>
+              <h3 className="font-bold text-white text-lg mb-3">{p.title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed">{p.desc}</p>
             </motion.div>
           ))}

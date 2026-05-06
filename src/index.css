@@ -1,7 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, -apple-system, sans-serif; background: #020617; color: #fff; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #020617;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
 
 @keyframes accordion-down {
   from { height: 0 }
@@ -12,8 +21,8 @@ body { font-family: system-ui, -apple-system, sans-serif; background: #020617; c
   to { height: 0 }
 }
 .data-\[state\=open\]\:animate-accordion-down[data-state=open] {
-  animation: accordion-down 0.2s ease-out;
+  animation: accordion-down 0.25s ease-out;
 }
 .data-\[state\=closed\]\:animate-accordion-up[data-state=closed] {
-  animation: accordion-up 0.2s ease-out;
+  animation: accordion-up 0.25s ease-out;
 }
